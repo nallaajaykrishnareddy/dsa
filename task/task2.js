@@ -31,3 +31,8 @@ keys.forEach((key) => {
 });
 
 console.log(output);
+
+// using inbuilt method
+const result = Object.groupBy(obj, ({ key }) => key);
+
+console.log("result", result);
