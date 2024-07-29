@@ -1,23 +1,33 @@
-const productExceptSelf = (nums) => {
-  const n = nums.length;
-
-  const output = Array.from(n).fill(1);
-  let prefix = 1;
-  for (let i = 0; i < n; i++) {
-    output[i] = prefix;
-    prefix *= nums[i];
-  }
-
-  console.log(output);
-
-  let suffix = 1;
-  for (let i = n - 1; i >= 0; i--) {
-    output[i] *= suffix;
-    suffix *= nums[i];
-  }
-  return output;
+const romanToNumberMap = {
+  I: 1,
+  V: 5,
+  X: 10,
+  L: 50,
+  C: 100,
+  D: 500,
+  M: 1000,
 };
 
-const nums = [1, 2, 3, 4];
-const output = productExceptSelf(nums);
-console.log(output);
+const romanToInt = (str) => {
+  const n = str.length;
+  let number = 0;
+  let i = 0;
+
+  while (i < n) {
+    const char = str[i];
+    const nextChar = str[i + 1];
+
+    if (i + 1 < n && romanToNumberMap[char] < romanToNumberMap[nextChar]) {
+      number -= romanToNumberMap[char];
+    } else {
+      number += romanToNumberMap[char];
+    }
+
+    i += 1;
+  }
+
+  return number;
+};
+
+// Example usage:
+console.log(romanToInt("MCMXCIV")); // Output: 1994
