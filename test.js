@@ -1,33 +1,15 @@
-const romanToNumberMap = {
-  I: 1,
-  V: 5,
-  X: 10,
-  L: 50,
-  C: 100,
-  D: 500,
-  M: 1000,
-};
+const anagrams = (strs) => {
+  const map = new Map();
 
-const romanToInt = (str) => {
-  const n = str.length;
-  let number = 0;
-  let i = 0;
-
-  while (i < n) {
-    const char = str[i];
-    const nextChar = str[i + 1];
-
-    if (i + 1 < n && romanToNumberMap[char] < romanToNumberMap[nextChar]) {
-      number -= romanToNumberMap[char];
-    } else {
-      number += romanToNumberMap[char];
+  for (const str of strs) {
+    const sorted = str.split("").sort().join("")
+    if (!map.has(sorted)) {
+      map.set(sorted, [])
     }
-
-    i += 1;
+    map.get(sorted).push(str)
   }
 
-  return number;
-};
+  return Array.from(map.values())
+}
 
-// Example usage:
-console.log(romanToInt("MCMXCIV")); // Output: 1994
+console.log(anagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
