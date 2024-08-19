@@ -1,24 +1,17 @@
-var summaryRanges = function (nums) {
-  const ans = [];
-
-  let i = 0;
-  while (i < nums.length) {
-    let start = nums[i];
-    while (nums[i + 1] === nums[i] + 1) {
-      i += 1;
-    }
-
-    if (start !== nums[i]) {
-      ans.push(start + "->" + nums[i]);
-    } else {
-      ans.push(nums[i].toString());
-    }
-
-    i += 1;
+const counter = (() => {
+  let counter = 0;
+  function inner() {
+    counter += 1;
+    return counter;
   }
+  inner.reset = function () {
+    counter = 0;
+    return counter;
+  };
+  return inner;
+})();
 
-  return ans;
-};
-
-const nums = [0, 1, 2, 4, 5, 7];
-console.log(summaryRanges(nums));
+counter();
+counter();
+console.log(counter());
+console.log(counter.reset());
