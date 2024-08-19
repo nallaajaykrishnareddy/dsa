@@ -17,7 +17,7 @@ const sortUsingDutchFlag = (nums) => {
   let high = nums.length - 1;
 
   while (mid <= high) {
-    if (nums[low] === 0) {
+    if (nums[mid] === 0) {
       [nums[low], nums[mid]] = [nums[mid], nums[low]];
       low += 1;
       mid += 1;
@@ -31,7 +31,7 @@ const sortUsingDutchFlag = (nums) => {
   return nums;
 };
 
-const nums = [2, 0, 2, 1, 1, 0];
+const nums = [2, 0, 1];
 
 // console.log(sort(nums));
 console.log(sortUsingDutchFlag(nums));
