@@ -1,17 +1,16 @@
-const counter = (() => {
-  let counter = 0;
-  function inner() {
-    counter += 1;
-    return counter;
-  }
-  inner.reset = function () {
-    counter = 0;
-    return counter;
-  };
-  return inner;
-})();
+const sort = (nums) => {
+  const n = nums.length;
 
-counter();
-counter();
-console.log(counter());
-console.log(counter.reset());
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n - 1 - i; j++) {
+      if (nums[j] > nums[j + 1]) {
+        [nums[j + 1], nums[j]] = [nums[j], nums[j + 1]];
+      }
+    }
+  }
+  return nums;
+};
+
+const nums = [2, 0, 2, 1, 1, 0];
+
+console.log(sort(nums));
