@@ -1,33 +1,28 @@
 /**
- You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have.
- Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels.
- Letters are case sensitive, so "a" is considered a different type of stone from "A".
-
-Example 1:
-Input: jewels = "aA", stones = "aAAbbbb"
-Output: 3
-
-Example 2:
-Input: jewels = "z", stones = "ZZ"
-Output: 0
+ *
+ * @param {number[]} numbers
+ * @returns
  */
+const search = (numbers, target) => {
+  const len = numbers.length;
+  let low = 0;
+  let high = len - 1;
+  let result = -1;
 
-/**
- * @param {string} jewels
- * @param {string} stones
- * @return {number}
- */
-var numJewelsInStones = function (jewels, stones) {
-  const jewelsSet = new Set(jewels);
-
-  let count = 0;
-  for (const stone of stones) {
-    if (jewelsSet.has(stone)) {
-      count += 1;
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    if (numbers[mid] === target) {
+      result = mid;
+      low = mid + 1;
+    }
+    if (target < numbers[mid]) {
+      high = mid - 1;
+    } else {
+      low = mid + 1;
     }
   }
-  return count;
+  return result;
 };
 
-console.log(numJewelsInStones("aA", "aAAbbbb"));
-console.log(numJewelsInStones("z", "ZZ"));
+const numbers = [1, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9];
+console.log(search(numbers, 6));
