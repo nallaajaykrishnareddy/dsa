@@ -1,28 +1,35 @@
 /**
  *
- * @param {number[]} numbers
- * @returns
+ * @param {string} str1
+ * @param {string} str2
+ * @param {number} k
  */
-const search = (numbers, target) => {
-  const len = numbers.length;
-  let low = 0;
-  let high = len - 1;
-  let result = -1;
-
-  while (low <= high) {
-    const mid = Math.floor((low + high) / 2);
-    if (numbers[mid] === target) {
-      result = mid;
-      low = mid + 1;
-    }
-    if (target < numbers[mid]) {
-      high = mid - 1;
-    } else {
-      low = mid + 1;
-    }
+const areKAnagrams = (str1, str2, k) => {
+  if (str1.length !== str2.length) {
+    return false;
   }
-  return result;
+
+  const map1 = new Map();
+  const map2 = new Map();
+
+  for (let i = 0; i < str1.length; i++) {
+    const char1 = str1[i];
+    const char2 = str2[i];
+    map1.set(char1, (map1.get(char1) || 0) + 1);
+    map2.set(char2, (map2.get(char2) || 0) + 1);
+  }
+
+  let difference = 0;
+
+  for (const [key, count1] of map1.entries()) {
+    const count2 = map2.get(key) || 0;
+    difference += Math.abs(count1 - count2);
+  }
+
+  return difference <= k;
 };
 
-const numbers = [1, 1, 2, 3, 4, 5, 6, 6, 7, 8, 9];
-console.log(search(numbers, 6));
+console.log(areKAnagrams("abc", "cab", 1)); // true (1 change needed: swap 'a' and 'c')
+console.log(areKAnagrams("abc", "xyz", 3)); // true (3 changes needed: replace 'a' with 'x', 'b' with 'y', and 'c' with 'z')
+console.log(areKAnagrams("abc", "def", 1)); // false (more than 1 change needed)
+console.log(areKAnagrams("abc", "abcd", 1)); // false (lengths are different)
