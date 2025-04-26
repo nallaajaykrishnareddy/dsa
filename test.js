@@ -1,9 +1,22 @@
-const a = {};
-const b = { key: "b" };
-const c = { key: "c" };
+function sort(nums) {
+  let left = 0,
+    mid = 0,
+    right = nums.length - 1;
 
-a[b] = 123;
-a[c] = 456;
-console.log(a);
+  while (mid <= right) {
+    if (nums[mid] === 0) {
+      [nums[left], nums[mid]] = [nums[mid], nums[left]];
+      left += 1;
+      mid += 1;
+    } else if (nums[mid] === 1) {
+      mid += 1;
+    } else {
+      [nums[mid], nums[right]] = [nums[right], nums[mid]];
+      right -= 1;
+    }
+  }
+  return nums;
+}
 
-console.log(a[b]); // ?
+const nums = [2, 0, 1];
+console.log(sort(nums));
