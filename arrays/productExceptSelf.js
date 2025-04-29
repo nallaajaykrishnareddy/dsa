@@ -1,12 +1,22 @@
-const moveZeroes = (nums) => {
-  let i = 0;
-  for (let j = 0; j < nums.length; j++) {
-    if (nums[j] !== 0) {
-      [nums[i], nums[j]] = [nums[j], nums[i]];
-      i += 1;
-    }
+const product = (numbers) => {
+  const result = [];
+  const n = numbers.length;
+  let prefix = 1;
+  let suffix = 1;
+  for (let i = 0; i < n; i++) {
+    const element = numbers[i];
+    result[i] = prefix;
+    prefix *= element;
   }
-  return nums;
+
+  for (let i = n - 1; i >= 0; i--) {
+    const element = numbers[i];
+    result[i] *= suffix;
+    suffix *= element;
+  }
+
+  return result;
 };
 
-console.log(moveZeroes([0, 1, 0, 3, 12, 0, 8, 9, 0, 0, 0, 0, 1]));
+console.log(product([1, 2, 3, 4]));
+console.log(product([1, 1, 1, 2]));
