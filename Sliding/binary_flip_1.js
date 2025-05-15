@@ -20,7 +20,7 @@ const getCountOf1s = (numbers, k) => {
       }
       i += 1;
     }
-    maxLen = Math.max(maxZero, j - i + 1);
+    maxLen = Math.max(maxLen, j - i + 1);
   }
   return maxLen;
 };
